@@ -1,0 +1,13 @@
+CREATE TABLE question_answers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id INT NOT NULL COMMENT 'interview_sessions 테이블의 ID (FK)',
+    question_text TEXT NOT NULL COMMENT 'Gemini가 생성한 질문',
+    answer_text TEXT NULL COMMENT '사용자가 입력한 답변',
+    question_type VARCHAR(50) DEFAULT 'general' COMMENT '질문 유형 (e.g., technical, behavioral)',
+
+    FOREIGN KEY (session_id)
+        REFERENCES interview_sessions(id)
+        ON DELETE CASCADE,
+
+    INDEX idx_session_id (session_id)
+) COMMENT='개별 질문 및 답변 저장 테이블';
